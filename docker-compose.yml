@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+
+  zenn-preview:
+    build: .
+    restart: always
+    volumes:
+      - "zenn-articles:/home/node/app/articles"
+      - "zenn-books:/home/node/app/books"
+    ports:
+      - "8000:8000"
+
+volumes:
+  zenn-articles:
+  zenn-books:
+
