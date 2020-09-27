@@ -11,8 +11,8 @@ RUN set -eux; \
 
 # install zenn-cli
 RUN set -eux; \
-        gosu node mkdir /home/node/app; \
-        cd /home/node/app; \
+        install -o node -g node -d /opt/zenn; \
+        cd /opt/zenn; \
         \
         gosu node npm init --yes; \
         gosu node npm install zenn-cli; \
@@ -20,7 +20,12 @@ RUN set -eux; \
         gosu node npx zenn init;
 
 USER node
-WORKDIR /home/node/app
+WORKDIR /opt/zenn
+
+# setup git repository
+RUN set -eux; \
+        sed -i -e '$a*.json\n\nREADME.md\n\n.keep' .gitignore; \
+        git init;
 
 CMD ["npx", "zenn", "preview"]
 

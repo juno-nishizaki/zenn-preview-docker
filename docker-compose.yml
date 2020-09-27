@@ -6,12 +6,18 @@ services:
     build: .
     restart: always
     volumes:
-      - "zenn-articles:/home/node/app/articles"
-      - "zenn-books:/home/node/app/books"
+      - "zenn-articles:/opt/zenn/articles"
+      - "zenn-books:/opt/zenn/books"
+      - "zenn-git:/opt/zenn/.git"
+      - "user-home:/home/node"
     ports:
       - "8000:8000"
+    environment:
+      TZ: Asia/Tokyo
 
 volumes:
   zenn-articles:
   zenn-books:
+  zenn-git:
+  user-home:
 
